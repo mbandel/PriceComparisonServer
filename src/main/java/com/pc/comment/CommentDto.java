@@ -1,6 +1,6 @@
 package com.pc.comment;
 
-import com.pc.product.ProductDto;
+import com.pc.poster.PosterDto;
 import com.pc.user.UserDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public class CommentDto {
     @Size(max = 300)
     private String content;
     private UserDto user;
-    private ProductDto product;
+    private PosterDto product;
     private String date;
 
     public Comment mapToDomain(){
@@ -25,8 +25,8 @@ public class CommentDto {
         if (comment.getUser()!=null){
             comment.setUser(this.user.mapToDomain());
         }
-        if(comment.getProduct()!=null){
-            comment.setProduct(this.product.mapToDomain());
+        if(comment.getPoster()!=null){
+            comment.setPoster(this.product.mapToDomain());
         }
         comment.setDate(this.date);
         return comment;

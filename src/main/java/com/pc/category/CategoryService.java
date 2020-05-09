@@ -1,7 +1,5 @@
 package com.pc.category;
 
-import com.pc.product.Product;
-import com.pc.product.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

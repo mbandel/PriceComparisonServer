@@ -1,15 +1,13 @@
 package com.pc.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pc.product.Product;
-import com.pc.product.ProductNotFoundException;
+import com.pc.poster.Poster;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,7 +18,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserID")
+    @Column
     private Long id;
 
     @Column(name = "FirstName")
@@ -42,7 +40,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<Product> products;
+    private List<Poster> posters;
 
     public User(String firstName, String lastName, String username, String email, String password) {
         this.firstName=firstName;

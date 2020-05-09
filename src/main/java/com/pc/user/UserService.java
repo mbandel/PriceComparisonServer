@@ -1,6 +1,6 @@
 package com.pc.user;
 
-import com.pc.product.Product;
+import com.pc.poster.Poster;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +58,11 @@ public class UserService {
             throw new UserNotFoundException("User: " + username + " not found");
         }
         return user.get();
+    }
+
+    public List<Poster> getUserProducts(Long id){
+        User user = findUserById(id);
+        return user.getPosters();
     }
 
     public User editUser(Long id, UserDto userRequest) {

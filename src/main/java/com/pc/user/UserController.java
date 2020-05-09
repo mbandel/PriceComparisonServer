@@ -26,9 +26,19 @@ public class UserController {
     	return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/userbyemail/{email}")
-    public ResponseEntity<?> getUser(@PathVariable String email) {
+    @GetMapping("/user/mail/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
         return new ResponseEntity<>(userService.findUserByEmail(email), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/username/{username}")
+    public ResponseEntity<?> getUser(@PathVariable String username) {
+        return new ResponseEntity<>(userService.findUserByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}/products")
+    public ResponseEntity<?> getUserProducts(@PathVariable Long id){
+        return new ResponseEntity<>(userService.getUserProducts(id), HttpStatus.OK);
     }
     
     @PutMapping("/user/{id}")
