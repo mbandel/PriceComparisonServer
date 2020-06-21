@@ -2,6 +2,7 @@ package com.pc.poster;
 
 
 import com.pc.product.ProductRepository;
+import com.pc.product.ProductService;
 import com.pc.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PosterController {
     @Autowired
     StoreRepository storeRepository;
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
     @GetMapping("/posters/order")
     public ResponseEntity<?> getPostersOrder(){
@@ -44,9 +45,9 @@ public class PosterController {
         return new ResponseEntity<>(posterRepository.findAllByUser_Id(id), HttpStatus.OK);
     }
 
-    @GetMapping("posters/product/{name}")
-    public ResponseEntity<?> getPostersByProductName(@PathVariable String name){
-        return new ResponseEntity<>(productRepository.findAllByName(name), HttpStatus.OK);
+    @GetMapping("posters/product/{id}")
+    public ResponseEntity<?> getPostersByProductId(@PathVariable Long id){
+        return new ResponseEntity<>(productService.getPostersByProductId(id), HttpStatus.OK);
     }
 
     @GetMapping("poster/comments/{id}")

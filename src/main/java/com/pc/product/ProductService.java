@@ -8,6 +8,7 @@ import com.pc.poster.PosterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ public class ProductService {
     public Product getProductById(Long productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (!product.isPresent()) {
-            throw new PosterNotFoundException("Product  with id: " + productId + " not found");
+            throw new ProductNotFoundException("Product  with id: " + productId + " not found");
         }
         logger.info("Product found: " + product.get().getName());
         return product.get();
@@ -39,5 +40,10 @@ public class ProductService {
         productRepository.save(product);
         logger.info("Product with ID: " + product.getId() + " added");
         return true;
+    }
+
+    public List<Poster> getPostersByProductId(Long id){
+        Product product = getProductById(id);
+        return product.getPosters();
     }
 }

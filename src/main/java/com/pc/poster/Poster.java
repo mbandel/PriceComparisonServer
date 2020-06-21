@@ -26,7 +26,6 @@ public class Poster {
 
     @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "ProductId")
-    @JsonIgnore
     private Product product;
 
     @Column(name = "Price")
