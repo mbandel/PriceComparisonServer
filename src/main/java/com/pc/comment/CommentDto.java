@@ -15,7 +15,7 @@ public class CommentDto {
     @Size(max = 300)
     private String content;
     private UserDto user;
-    private PosterDto product;
+    private PosterDto poster;
     private String date;
 
     public Comment mapToDomain(){
@@ -26,7 +26,7 @@ public class CommentDto {
             comment.setUser(this.user.mapToDomain());
         }
         if(comment.getPoster()!=null){
-            comment.setPoster(this.product.mapToDomain());
+            comment.setPoster(this.poster.mapToDomain());
         }
         comment.setDate(this.date);
         return comment;

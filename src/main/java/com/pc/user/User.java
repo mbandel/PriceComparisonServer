@@ -2,6 +2,7 @@ package com.pc.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pc.poster.Poster;
+import com.pc.rating.Rating;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,6 +42,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Poster> posters;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Rating> ratings;
 
     public User(String firstName, String lastName, String username, String email, String password) {
         this.firstName=firstName;

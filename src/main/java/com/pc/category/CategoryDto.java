@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class CategoryDto {
     private Long id;
 
-    @Size(max=10)
+
     private String name;
 
     public Category mapToDomain(){

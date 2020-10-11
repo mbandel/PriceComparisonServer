@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pc.category.Category;
 import com.pc.comment.Comment;
 import com.pc.product.Product;
+import com.pc.rating.Rating;
 import com.pc.store.Store;
 import com.pc.user.User;
 import lombok.*;
@@ -47,6 +48,12 @@ public class Poster {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "poster")
+    @JsonIgnore
+    private List<Rating> ratings = new ArrayList<>();
+
+    @Column
+    private int ratingValue;
 
     public Poster(Product product, Double price, Store store, User user, String date){
         this.product=product;
@@ -54,6 +61,14 @@ public class Poster {
         this.store=store;
         this.user=user;
         this.date=date;
+        ratingValue = 0;
     }
 
+    public void deleteRating(int rating){
+        this.ratingValue -= rating;
+    }
+
+    public void updateRating(int rating){
+        this.ratingValue += rating;
+    }
 }

@@ -5,6 +5,7 @@ import com.pc.category.CategoryRepository;
 import com.pc.comment.Comment;
 import com.pc.product.Product;
 import com.pc.product.ProductRepository;
+import com.pc.rating.*;
 import com.pc.store.Store;
 import com.pc.store.StoreRepository;
 import com.pc.user.User;
@@ -26,6 +27,8 @@ public class PosterService {
     UserRepository userRepository;
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    RatingRepository ratingRepository;
 
     private static Logger logger = Logger.getLogger(PosterController.class.getName());
 
@@ -60,9 +63,35 @@ public class PosterService {
     }
 
 
-    public List<Comment> getComments(Long id){
+    public List<Comment> getCommentsByPosterId(Long id){
         return getPosterById(id).getComments();
     }
+
+    public List<Rating> getRatingsByPosterId(Long id){
+        return getPosterById(id).getRatings();
+    }
+
+    public Rating getRatingByPosterAndUserId(Long posterId, Long userId){
+        List<Rating> ratings = getRatingsByPosterId(posterId);
+        for(Rating rating : ratings){
+            if (rating.getUser().getId() == userId)
+                return rating;
+        }
+        return null;
+    }
+
+    public void editRating(Rating rating, boolean isRatingEdited){
+        Optional<Poster> optionalPoster = posterRepository.findById(rating.getPoster().getId());
+        if(!optionalPoster.isPresent()) {
+            throw new PosterNotFoundException("Poster not found");
+        }
+        Poster poster = optionalPoster.get();
+        poster.deleteRating(-1 * rating.getValue());
+        poster.updateRating(rating.getValue());
+        logger.info("Poster with ID: " + poster.getId() + " updated");
+        posterRepository.save(poster);
+    }
+
 
 //    public Poster findByName(String name){
 //            Optional<Poster> optionalPoster = posterRepository.findByName(name);

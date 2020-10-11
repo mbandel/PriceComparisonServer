@@ -21,7 +21,7 @@ public class CommentService {
 
     public boolean validate(CommentDto commentDto){
         Optional<User> user =  userRepository.findById(commentDto.getUser().mapToDomain().getId());
-        Optional<Poster> poster = posterRepository.findById(commentDto.getProduct().getId());
+        Optional<Poster> poster = posterRepository.findById(commentDto.getPoster().getId());
         if (commentRepository.existsByPosterAndUser(poster.get(), user.get())){
             return false;
         }

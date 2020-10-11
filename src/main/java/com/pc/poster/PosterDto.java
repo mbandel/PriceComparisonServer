@@ -19,6 +19,7 @@ public class PosterDto {
     private StoreDto store;
     private UserDto user;
     private String date;
+    private int ratingValue;
 
     public Poster mapToDomain(){
         Poster poster = new Poster();
@@ -34,6 +35,7 @@ public class PosterDto {
         }
         poster.setPrice(price);
         poster.setDate(this.date);
+        poster.setRatingValue(this.ratingValue);
         return poster;
     }
     

@@ -3,6 +3,7 @@ package com.pc.poster;
 
 import com.pc.product.ProductRepository;
 import com.pc.product.ProductService;
+import com.pc.rating.Rating;
 import com.pc.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -52,9 +54,25 @@ public class PosterController {
 
     @GetMapping("poster/comments/{id}")
     public ResponseEntity<?> getCommentsByPosterId(@PathVariable Long id){
-        return new ResponseEntity<>(posterService.getComments(id), HttpStatus.OK);
+        return new ResponseEntity<>(posterService.getCommentsByPosterId(id), HttpStatus.OK);
     }
 
+    @GetMapping("poster/ratings/{id}")
+    public ResponseEntity<?> getRatingsByPosterId(@PathVariable Long id){
+        return new ResponseEntity<>(posterService.getRatingsByPosterId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("poster/ratingValue/{id}")
+    public ResponseEntity<?>getRatingValueByPosterId(@PathVariable Long id){
+        int value = 0;
+        List<Rating> posterRating = posterService.getRatingsByPosterId(id);
+        if (posterRating!=null) {
+            for (Rating rating : posterRating) {
+                value+=rating.getValue();
+            }
+        }
+        return new ResponseEntity<>(value, HttpStatus.OK);
+    }
 
     @PostMapping("/poster")
     public ResponseEntity<?> addPoster(@Valid @RequestBody PosterDto posterDto){
