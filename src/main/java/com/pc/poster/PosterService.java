@@ -45,13 +45,7 @@ public class PosterService {
         Optional<Product> product = productRepository.findById(posterDto.getProduct().mapToDomain().getId());
         Optional<Store> store = storeRepository.findById(posterDto.getStore().mapToDomain().getId());
         Optional<User> user = userRepository.findById(posterDto.getUser().mapToDomain().getId());
-        //jezeli poster ma ta sama nazwe oraz ten sam sklep
-//        for (Product product: optionalProducts) {
-//            if (productRepository.existsByName(product.getName()) && product.getStore().getId()==productDto.getStore().getId()){
-//                logger.info("Product : " + productDto.getName() + " already exists");
-//                return false;
-//            }
-//        }
+
         if (posterRepository.existsByProductAndStore(product.get(), store.get())) {
             logger.info("Poster : " + " already exists");
             return false;
@@ -86,18 +80,11 @@ public class PosterService {
             throw new PosterNotFoundException("Poster not found");
         }
         Poster poster = optionalPoster.get();
-        poster.deleteRating(-1 * rating.getValue());
+        if(isRatingEdited) {
+            poster.deleteRating(-1 * rating.getValue());
+        }
         poster.updateRating(rating.getValue());
         logger.info("Poster with ID: " + poster.getId() + " updated");
         posterRepository.save(poster);
     }
-
-
-//    public Poster findByName(String name){
-//            Optional<Poster> optionalPoster = posterRepository.findByName(name);
-//            if(!optionalPoster.isPresent()){
-//                throw new PosterNotFoundException("Poster not found");
-//            }
-//            return optionalPoster.get();
-//    }
 }

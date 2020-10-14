@@ -78,7 +78,7 @@ public class PosterController {
     public ResponseEntity<?> addPoster(@Valid @RequestBody PosterDto posterDto){
         if (!posterService.validate(posterDto)){
             return new ResponseEntity<>("Poster already exist", HttpStatus.BAD_REQUEST);
-            }
+        }
         return new ResponseEntity<>("Poster added", HttpStatus.OK);
         }
 }

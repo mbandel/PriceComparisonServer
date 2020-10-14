@@ -56,7 +56,6 @@ public class RatingService {
             rating.updateValues(ratingUpdate);
             posterService.editRating(rating, true);
             ratingRepository.save(rating);
-
             return true;
         }
         return false;

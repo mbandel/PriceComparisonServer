@@ -51,11 +51,4 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
-
-    /*
-    @GetMapping("/user/{id}/products")
-    public ResponseEntity<?> getUserPets(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.findUserProductsById(id), HttpStatus.OK);
-    }
-     */
 }

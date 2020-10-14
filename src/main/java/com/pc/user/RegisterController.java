@@ -23,7 +23,6 @@ public class RegisterController {
             return new ResponseEntity<>("Email is already used", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("Registration complete", HttpStatus.CREATED);
+        return new ResponseEntity<>("Registration complete", HttpStatus.OK);
     }
-
 }
