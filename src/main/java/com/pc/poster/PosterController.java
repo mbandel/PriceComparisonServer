@@ -80,5 +80,5 @@ public class PosterController {
             return new ResponseEntity<>("Poster already exist", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("Poster added", HttpStatus.OK);
-        }
+    }
 }

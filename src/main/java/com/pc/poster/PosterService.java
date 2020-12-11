@@ -6,10 +6,14 @@ import com.pc.comment.Comment;
 import com.pc.product.Product;
 import com.pc.product.ProductRepository;
 import com.pc.rating.*;
+import com.pc.shoppingList.ShoppingList;
+import com.pc.shoppingList.ShoppingListDto;
+import com.pc.shoppingList.ShoppingListRepository;
 import com.pc.store.Store;
 import com.pc.store.StoreRepository;
 import com.pc.user.User;
 import com.pc.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +33,8 @@ public class PosterService {
     ProductRepository productRepository;
     @Autowired
     RatingRepository ratingRepository;
+    @Autowired
+    ShoppingListRepository shoppingListRepository;
 
     private static Logger logger = Logger.getLogger(PosterController.class.getName());
 
@@ -87,4 +93,5 @@ public class PosterService {
         logger.info("Poster with ID: " + poster.getId() + " updated");
         posterRepository.save(poster);
     }
+
 }

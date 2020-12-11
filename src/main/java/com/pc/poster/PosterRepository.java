@@ -13,6 +13,4 @@ public interface PosterRepository extends JpaRepository<Poster, Long> {
     boolean existsById(Long id);
     boolean existsByProductAndStore(Product product, Store store);
     List<Poster>findAllByUser_Id(Long id);
-
-
 }

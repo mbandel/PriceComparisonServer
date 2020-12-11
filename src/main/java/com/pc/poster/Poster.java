@@ -7,6 +7,8 @@ import com.pc.category.Category;
 import com.pc.comment.Comment;
 import com.pc.product.Product;
 import com.pc.rating.Rating;
+import com.pc.shoppingList.ShoppingList;
+import com.pc.shoppingList.ShoppingListDto;
 import com.pc.store.Store;
 import com.pc.user.User;
 import lombok.*;
@@ -55,13 +57,17 @@ public class Poster {
     @Column
     private int ratingValue;
 
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    private List<ShoppingList> shoppingLists = new ArrayList<>();
+
     public Poster(Product product, Double price, Store store, User user, String date){
         this.product=product;
         this.price=price;
         this.store=store;
         this.user=user;
         this.date=date;
-        ratingValue = 0;
+        this.ratingValue = 0;
     }
 
     public void deleteRating(int rating){
@@ -70,5 +76,17 @@ public class Poster {
 
     public void updateRating(int rating){
         this.ratingValue += rating;
+    }
+
+    public void addShoppingList(ShoppingList shoppingList){
+        shoppingLists.add(shoppingList);
+    }
+
+    public void removeShoppingList(ShoppingList shoppingListToRemove) {
+        for (int i=0; i<shoppingLists.size(); i++) {
+            if (shoppingLists.get(i).getId().equals(shoppingListToRemove.getId())){
+                shoppingLists.remove(i);
+            }
+        }
     }
 }

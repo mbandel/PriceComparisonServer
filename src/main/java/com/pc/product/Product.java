@@ -24,7 +24,7 @@ public class Product {
     private Long id;
 
     @Column(name = "Name")
-    String name;
+    private String name;
 
     @OneToOne(targetEntity = Category.class)
     @JoinColumn(name = "CategoryId")

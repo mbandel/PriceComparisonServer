@@ -2,6 +2,7 @@ package com.pc.rating;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pc.poster.Poster;
+import com.pc.shoppingList.ShoppingList;
 import com.pc.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Rating {
     @JoinColumn(name = "PosterId")
     @JsonIgnore
     private Poster poster;
+
 
     public Rating(User user, int value, Poster poster){
         this.user = user;
