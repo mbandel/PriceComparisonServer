@@ -67,5 +67,14 @@ public class User {
         if (userDto.getEmail() != null) {
             this.email = userDto.getEmail();
         }
+        if (userDto.getPassword() != null) {
+            this.password = userDto.getPassword();
+        }
+        if (userDto.getFirstName() != null) {
+            this.firstName = userDto.getFirstName();
+        }
+        if (userDto.getLastName() != null) {
+            this.lastName = userDto.getLastName();
+        }
     }
 }

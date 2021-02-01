@@ -20,6 +20,8 @@ public class PosterDto {
     private UserDto user;
     private String date;
     private int ratingValue;
+    private Double promotionPrice;
+    private String promotionDate;
 
     public Poster mapToDomain(){
         Poster poster = new Poster();
@@ -33,9 +35,16 @@ public class PosterDto {
         if (user!=null){
             poster.setUser(this.user.mapToDomain());
         }
-        poster.setPrice(price);
+        poster.setPrice(this.price);
         poster.setDate(this.date);
         poster.setRatingValue(this.ratingValue);
+
+        if (promotionPrice!=null){
+            poster.setPromotionPrice(this.promotionPrice);
+        }
+        if (promotionDate!=null){
+            poster.setPromotionDate(this.promotionDate);
+        }
         return poster;
     }
     

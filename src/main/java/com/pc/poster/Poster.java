@@ -61,6 +61,13 @@ public class Poster {
     @JsonIgnore
     private List<ShoppingList> shoppingLists = new ArrayList<>();
 
+    @Column
+    private Double promotionPrice;
+
+    @Column
+    private String promotionDate;
+
+
     public Poster(Product product, Double price, Store store, User user, String date){
         this.product=product;
         this.price=price;
@@ -88,5 +95,10 @@ public class Poster {
                 shoppingLists.remove(i);
             }
         }
+    }
+
+    public void addPromotion(PosterDto posterDto){
+        this.promotionPrice = posterDto.getPromotionPrice();
+        this.promotionDate = posterDto.getPromotionDate();
     }
 }

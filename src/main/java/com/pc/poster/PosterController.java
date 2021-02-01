@@ -81,4 +81,13 @@ public class PosterController {
         }
         return new ResponseEntity<>("Poster added", HttpStatus.OK);
     }
+
+    @PutMapping("/poster/{id}/addPromotion")
+    public ResponseEntity<?> addPromotion(@PathVariable Long id, @Valid @RequestBody PosterDto posterDto){
+        if (!posterRepository.existsById(id)){
+            return new ResponseEntity<>("Poster doesn't exist", HttpStatus.BAD_REQUEST);
+        }
+        posterService.addPromotion(id, posterDto);
+        return new ResponseEntity<>("Promotion added", HttpStatus.OK);
+    }
 }

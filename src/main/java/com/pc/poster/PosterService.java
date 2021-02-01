@@ -80,7 +80,7 @@ public class PosterService {
         return null;
     }
 
-    public void editRating(Rating rating, boolean isRatingEdited){
+    public void editRating(Rating rating, boolean isRatingEdited) {
         Optional<Poster> optionalPoster = posterRepository.findById(rating.getPoster().getId());
         if(!optionalPoster.isPresent()) {
             throw new PosterNotFoundException("Poster not found");
@@ -91,6 +91,16 @@ public class PosterService {
         }
         poster.updateRating(rating.getValue());
         logger.info("Poster with ID: " + poster.getId() + " updated");
+        posterRepository.save(poster);
+    }
+
+    public void addPromotion(Long id, PosterDto posterDto) {
+        Optional<Poster> optionalPoster = posterRepository.findById(id);
+        if(!optionalPoster.isPresent()) {
+            throw new PosterNotFoundException("Poster not found");
+        }
+        Poster poster = optionalPoster.get();
+        poster.addPromotion(posterDto);
         posterRepository.save(poster);
     }
 
